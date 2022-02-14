@@ -1,3 +1,5 @@
+namespace sample.microservice.order.Models;
+
 public class Item
 {
     public string SKU {get; set;}
