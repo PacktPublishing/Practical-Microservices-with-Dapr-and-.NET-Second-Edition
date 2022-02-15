@@ -6,7 +6,7 @@ public class Order
 
     public Guid Id { get; set; }
 
-    public string CustomerCode { get; set; }
+    public string? CustomerCode { get; set; }
 
     public List<OrderItem> Items { get; set; }
 }
