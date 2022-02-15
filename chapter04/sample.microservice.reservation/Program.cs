@@ -11,7 +11,7 @@ builder.Services.AddDaprClient(opt => opt.UseJsonSerializationOptions(jsonOpt));
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapPost("/reserve", async ([FromServices] DaprClient client, HttpContext context) =>
 {
