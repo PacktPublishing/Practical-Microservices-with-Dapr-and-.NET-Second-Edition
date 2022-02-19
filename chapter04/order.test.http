@@ -13,12 +13,3 @@ content-type: application/json
     }
   ]
 }
-
-###
-POST http://localhost:5020/v1.0/invoke/reservation-service/method/reserve HTTP/1.1
-content-type: application/json
-
-{
-    "SKU": "cookie1",
-    "Quantity": -30
-}

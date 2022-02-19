@@ -12,7 +12,7 @@ builder.Services.AddDaprClient(opt => opt.UseJsonSerializationOptions(jsonOpt));
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapGrpcService<ReservationService>();
 
