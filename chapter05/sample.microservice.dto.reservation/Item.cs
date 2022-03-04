@@ -1,10 +1,8 @@
-﻿using System;
+﻿namespace sample.microservice.dto.reservation;
 
-namespace sample.microservice.dto.reservation
+public class Item
 {
-    public class Item
-        {
-            public string SKU {get; set;}
-            public int Quantity { get; set; }
-        }
+    public string SKU {get; set;}
+
+    public int Quantity { get; set; }
 }

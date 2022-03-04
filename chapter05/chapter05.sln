@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.order", "sample.microservice.order\sample.microservice.order.csproj", "{1679C97F-7811-40D5-A325-1DF3DBBE3490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample.microservice.order", "sample.microservice.order\sample.microservice.order.csproj", "{1679C97F-7811-40D5-A325-1DF3DBBE3490}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.reservation", "sample.microservice.reservation\sample.microservice.reservation.csproj", "{A452C42F-FEBF-4ECC-B193-CF2A6B382F25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample.microservice.reservation", "sample.microservice.reservation\sample.microservice.reservation.csproj", "{A452C42F-FEBF-4ECC-B193-CF2A6B382F25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.dto.order", "sample.microservice.dto.order\sample.microservice.dto.order.csproj", "{67D2EF8A-DABC-4F53-AA9B-B851330630EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample.microservice.dto.order", "sample.microservice.dto.order\sample.microservice.dto.order.csproj", "{67D2EF8A-DABC-4F53-AA9B-B851330630EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.dto.reservation", "sample.microservice.dto.reservation\sample.microservice.dto.reservation.csproj", "{3D1DAF72-98E4-41E9-B18B-1B36C350ACCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample.microservice.dto.reservation", "sample.microservice.dto.reservation\sample.microservice.dto.reservation.csproj", "{3D1DAF72-98E4-41E9-B18B-1B36C350ACCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1679C97F-7811-40D5-A325-1DF3DBBE3490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,5 +69,11 @@ Global
 		{3D1DAF72-98E4-41E9-B18B-1B36C350ACCC}.Release|x64.Build.0 = Release|Any CPU
 		{3D1DAF72-98E4-41E9-B18B-1B36C350ACCC}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D1DAF72-98E4-41E9-B18B-1B36C350ACCC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {415D8401-AC18-48BC-A473-04914581148B}
 	EndGlobalSection
 EndGlobal
