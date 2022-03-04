@@ -1,2 +1,0 @@
-namespace sample.microservice.reservation;
-
