@@ -36,7 +36,6 @@ content-type: application/json
 }
 ###
 # @name erraticOrderRequest
-
 POST http://{{baseUrl}}:{{orderservicePort}}/order HTTP/1.1
 content-type: application/json
 
@@ -77,7 +76,6 @@ content-type: application/json
   ]
 }
 ###
-
 @orderId = {{erraticOrderRequest.response.body.$}}
 GET http://{{baseUrl}}:{{orderservicePort}}/order/{{orderId}}
 ###
@@ -85,7 +83,6 @@ GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{orderId}
 ###
 @reservationservicePort = 5002
 @reservationserviceDaprPort = 5020
-
 POST http://{{baseUrl}}:{{reservationservicePort}}/reserve HTTP/1.1
 content-type: application/json
 
