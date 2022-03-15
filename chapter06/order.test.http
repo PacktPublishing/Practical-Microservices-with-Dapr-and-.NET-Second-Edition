@@ -1,9 +1,14 @@
-POST http://localhost:5001/order HTTP/1.1
+@baseUrl = "localhost"
+@orderservicePort = "5001"
+@orderserviceDaprPort = "50010"
+####
+# @name orderRequest
+POST http://{{baseUrl}}:{{orderservicePort}}/order HTTP/1.1
 content-type: application/json
 
 {
   "CustomerCode": "Davide",
-  "Date": "2020-09-19T08:47:53.1224585Z",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
   "Items": [
     {
       "ProductCode": "rockiecookie",
@@ -38,11 +43,14 @@ content-type: application/json
   ]
 }
 ###
-GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
+@orderId = {{orderRequest.response.body.$}}
+GET http://{{baseUrl}}:{{orderservicePort}}/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
-GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
+GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
-POST http://localhost:5002/reserve HTTP/1.1
+@reservationservicePort = "5001"
+@reservationserviceDaprPort = "50010"
+POST http://{{baseUrl}}:{{reservationservicePort}}/reserve HTTP/1.1
 content-type: application/json
 
 {
@@ -50,11 +58,11 @@ content-type: application/json
     "Quantity": 4
 }
 ###
-GET http://localhost:5020/v1.0/state/reservationstore/cookie2  HTTP/1.1
+GET http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/state/reservationstore/cookie2  HTTP/1.1
 ###
-GET http://localhost:5002/balance/cookie43 HTTP/1.1
+GET http://{{baseUrl}}:{{reservationservicePort}}/balance/cookie43 HTTP/1.1
 ###
-POST http://localhost:5020/v1.0/state/reservationitemstore HTTP/1.1
+POST http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/state/reservationitemstore HTTP/1.1
 content-type: application/json
 
 [
