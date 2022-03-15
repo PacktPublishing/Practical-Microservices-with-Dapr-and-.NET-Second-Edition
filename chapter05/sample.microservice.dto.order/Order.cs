@@ -6,14 +6,14 @@ public class Order
 
     public Guid Id { get; set; }
 
-    public string CustomerCode { get; set; }
+    public string? CustomerCode { get; set; }
 
-    public List<OrderItem> Items { get; set; }
+    public List<OrderItem>? Items { get; set; }
 }
 
 public class OrderItem
 {
-    public string ProductCode {get; set;}
+    public string? ProductCode {get; set;}
 
     public int Quantity { get; set; }
 }

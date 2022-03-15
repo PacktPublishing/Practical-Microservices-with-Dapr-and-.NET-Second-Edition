@@ -1,13 +1,10 @@
-using System;
+namespace sample.microservice.common;
 
-namespace sample.microservice.common
+public class Wait
 {
-    public class Wait
+    public static void Random(int minWait = 3000, int maxWait = 10000)
     {
-        public static void Random(int minWait = 3000, int maxWait = 10000)
-        {
-            int wait = new System.Random().Next(minWait,maxWait);
-            System.Threading.Thread.Sleep(wait);
-        }
+        int wait = new Random().Next(minWait,maxWait);
+        Thread.Sleep(wait);
     }
 }
