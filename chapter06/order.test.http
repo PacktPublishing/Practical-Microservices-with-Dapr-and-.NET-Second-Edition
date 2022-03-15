@@ -12,15 +12,11 @@ content-type: application/json
   "Items": [
     {
       "ProductCode": "rockiecookie",
-      "Quantity": {{$randomInt 1 8}}
+      "Quantity": {{$randomInt 2 8}}
     },
     {
       "ProductCode": "bussola8",
       "Quantity": {{$randomInt 1 8}}
-    },
-    {
-      "ProductCode": "crazycookie",
-      "Quantity": 2
     }
   ],
   "SpecialRequests" : [
