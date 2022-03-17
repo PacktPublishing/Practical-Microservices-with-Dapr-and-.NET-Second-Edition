@@ -3,7 +3,7 @@
 @orderserviceDaprPort = 5010
 ###
 # @name simpleOrderRequest
-POST http://{{baseUrl}}:{{orderservicePort}}/order HTTP/1.1
+POST http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order HTTP/1.1
 content-type: application/json
 
 {
@@ -32,7 +32,7 @@ content-type: application/json
 }
 ###
 # @name erraticOrderRequest
-POST http://{{baseUrl}}:{{orderservicePort}}/order HTTP/1.1
+POST http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order HTTP/1.1
 content-type: application/json
 
 {
