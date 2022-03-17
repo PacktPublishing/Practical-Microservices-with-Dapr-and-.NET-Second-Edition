@@ -94,6 +94,11 @@
     },
     {
       "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "This is an alternative implict approach to retrieve state directly in the method declaration",
+      "line": 93
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
       "description": "via DaprClient, we publish a message to a component and on a topic",
       "line": 31,
       "selection": {
@@ -108,14 +113,29 @@
       }
     },
     {
-      "file": "sample.microservice.order/Controllers/OrderController.cs",
-      "description": "This is (one of the possible) approaches to decorating a method in a controller to subscribe to a topic provided by a component",
-      "line": 43
+      "file": "sample.microservice.reservation/Controllers/ReservationController.cs",
+      "description": "This method subscribe to the topic from other Dapr app",
+      "line": 17
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "This subscribe to Dapr topic for completed reservation",
+      "line": 14
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "Simulating a customization failure",
+      "line": 44
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "Using Dapr publish/subscribe to signal that customization failed",
+      "line": 46
     },
     {
       "file": "sample.microservice.order/Controllers/OrderController.cs",
-      "description": "This is an alternative implict approach to retrieve state directly in the method declaration",
-      "line": 93
+      "description": "This is (one of the possible) approaches to decorating a method in a controller to subscribe to a topic provided by a component",
+      "line": 43
     },
     {
       "file": "launch.ps1",
