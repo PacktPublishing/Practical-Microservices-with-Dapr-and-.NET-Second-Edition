@@ -133,11 +133,6 @@
       "line": 46
     },
     {
-      "file": "sample.microservice.order/Controllers/OrderController.cs",
-      "description": "This is (one of the possible) approaches to decorating a method in a controller to subscribe to a topic provided by a component",
-      "line": 43
-    },
-    {
       "file": "launch.ps1",
       "description": "This command, suitable for local testing & debugging, specify the local port on which the ASP.NET project will reply, the Dapr ports, the location of component files and the command to launch",
       "line": 1

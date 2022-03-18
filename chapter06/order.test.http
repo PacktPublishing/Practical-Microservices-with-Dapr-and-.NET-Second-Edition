@@ -73,8 +73,13 @@ content-type: application/json
 }
 ###
 @orderId = {{erraticOrderRequest.response.body.$}}
+# get order from ASP.NET endpoint
 GET http://{{baseUrl}}:{{orderservicePort}}/order/{{orderId}}
 ###
+# get order from Dapr endpoint invoking service
+GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order/{{orderId}} 
+###
+# get order from Dapr endpoint retrieving state 
 GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{orderId}}
 ###
 @reservationservicePort = 5002
