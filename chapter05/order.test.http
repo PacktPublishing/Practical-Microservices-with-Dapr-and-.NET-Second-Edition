@@ -3,7 +3,7 @@
 @orderserviceDaprPort = 5010
 ###
 # @name simpleOrderRequest
-POST http://{{baseUrl}}:{{orderservicePort}}/order HTTP/1.1
+POST http://{{baseUrl}}:{{orderservicePort}}/order
 content-type: application/json
 
 {
@@ -27,7 +27,7 @@ GET http://{{baseUrl}}:{{orderservicePort}}/order/{{orderId}}
 ###
 GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{orderId}}
 ###
-POST http://localhost:5002/reserve HTTP/1.1
+POST http://localhost:5002/reserve 
 content-type: application/json
 
 {
@@ -38,7 +38,7 @@ content-type: application/json
 @reservationservicePort = 5002
 @reservationserviceDaprPort = 5020
 ###
-GET http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/state/reservationstore/cookie2  HTTP/1.1
+GET http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/state/reservationstore/cookie2  
 ###
-GET http://{{baseUrl}}:{{reservationservicePort}}/balance/cookie2 HTTP/1.1
+GET http://{{baseUrl}}:{{reservationservicePort}}/balance/cookie2 
 ###
