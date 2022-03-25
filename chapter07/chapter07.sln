@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.dto.shi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.shipping", "sample.microservice.shipping\sample.microservice.shipping.csproj", "{52701B2F-157C-424E-A80F-52EB3B3C793E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter06", "Console\chapter06.csproj", "{7091DA37-6DC7-4229-8324-3A8F7DA27446}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter07", "Console\chapter07.csproj", "{7091DA37-6DC7-4229-8324-3A8F7DA27446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
