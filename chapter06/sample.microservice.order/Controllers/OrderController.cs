@@ -85,6 +85,33 @@ public class OrderController : ControllerBase
     }
 
     /// <summary>
+    /// Method for submitting a new order.
+    /// </summary>
+    /// <param name="order">Order info.</param>
+    /// <param name="daprClient">State client to interact with Dapr runtime.</param>
+    /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+    [Topic(PubSub, common.Topics.CustomizationCompletedTopicName)]
+    [HttpPost(common.Topics.CustomizationCompletedTopicName)]
+    public async Task<ActionResult<Guid>> OnCustomizationCompleted(OrderCustomization customization, [FromServices] DaprClient daprClient)
+    {             
+        var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, customization.OrderId.ToString());
+        if (state.Value == null)
+        {
+            return this.NotFound();
+        }
+
+        state.Value.Status = "customization completed";
+        state.Value.UpdatedOn = DateTime.UtcNow;
+
+        await state.SaveAsync();
+        
+        await daprClient.PublishEventAsync<Shipment>(PubSub, common.Topics.OrderPreparedTopicName, new dto.shipping.Shipment(){ OrderId = state.Value.Order.Id });
+
+        Console.WriteLine($"Acknowledged customization completed for order {customization.OrderId}");
+        return this.Ok();
+    }
+
+    /// <summary>
     /// Method for retrieving an order.
     /// </summary>
     /// <param name="orderid">Order Id state info.</param>
