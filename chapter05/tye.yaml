@@ -4,7 +4,7 @@
 # when you've given us a try, we'd love to know what you think:
 #    https://aka.ms/AA7q20u
 #
-name: chapter04
+name: chapter05
 extensions:
 - name: dapr
 

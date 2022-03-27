@@ -1,0 +1,156 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Dapr with SDK: from service-to-service to publish/subscribe",
+  "steps": [
+    {
+      "file": "sample.microservice.order/sample.microservice.order.csproj",
+      "description": "This is the SDK package ",
+      "line": 10,
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 8
+        },
+        "end": {
+          "line": 10,
+          "character": 67
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.order/Program.cs",
+      "description": "Setup Dapr integration with .NET 6 in minimal hosting",
+      "line": 10,
+      "selection": {
+        "start": {
+          "line": 10,
+          "character": 1
+        },
+        "end": {
+          "line": 10,
+          "character": 92
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.order/Program.cs",
+      "description": "As with any .NET 6 and MVC, this combined with Dapr integration does enable service-to-service invocation",
+      "line": 30,
+      "selection": {
+        "start": {
+          "line": 30,
+          "character": 1
+        },
+        "end": {
+          "line": 30,
+          "character": 22
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.order/Program.cs",
+      "description": "This instructs to leverage the CloudEvents format",
+      "line": 27,
+      "selection": {
+        "start": {
+          "line": 27,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 1
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.order/Program.cs",
+      "description": "This enables Publish/subscribe by providing a subscribe endpoint, so Dapr can find all the method decorated for the building block",
+      "line": 31
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "A simple method in a controller that will be reached by its route via the service-to-service invocation ",
+      "line": 16
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "With the injected DaprClient we can access via SDK the building blocks: here for retrieving a state entry",
+      "line": 22
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "Saving the state via Dapr",
+      "line": 29,
+      "selection": {
+        "start": {
+          "line": 29,
+          "character": 9
+        },
+        "end": {
+          "line": 29,
+          "character": 33
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "This is an alternative implict approach to retrieve state directly in the method declaration",
+      "line": 93
+    },
+    {
+      "file": "sample.microservice.order/Controllers/OrderController.cs",
+      "description": "via DaprClient, we publish a message to a component and on a topic",
+      "line": 31,
+      "selection": {
+        "start": {
+          "line": 31,
+          "character": 72
+        },
+        "end": {
+          "line": 31,
+          "character": 105
+        }
+      }
+    },
+    {
+      "file": "sample.microservice.reservation/Controllers/ReservationController.cs",
+      "description": "This method subscribe to the topic from other Dapr app",
+      "line": 17
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "This subscribe to Dapr topic for completed reservation",
+      "line": 14
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "Simulating a customization failure",
+      "line": 44
+    },
+    {
+      "file": "sample.microservice.customization/Controllers/CustomizationController.cs",
+      "description": "Using Dapr publish/subscribe to signal that customization failed",
+      "line": 46
+    },
+    {
+      "file": "launch.ps1",
+      "description": "This command, suitable for local testing & debugging, specify the local port on which the ASP.NET project will reply, the Dapr ports, the location of component files and the command to launch",
+      "line": 1
+    },
+    {
+      "file": "order.test.http",
+      "description": "This is call to the ASP.NET local endpoint, which in turn will invoke other services via Dapr",
+      "line": 6
+    },
+    {
+      "file": "order.test.http",
+      "description": "This request will introduce an error",
+      "line": 35
+    },
+    {
+      "file": "order.test.http",
+      "description": "This retrieves the state of the order via the Dapr sidecar endpoint",
+      "line": 78
+    }
+  ]
+}

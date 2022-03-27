@@ -7,36 +7,45 @@ var jsonOpt = new JsonSerializerOptions()
 };
 
 // Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddDaprClient(opt => opt.UseJsonSerializationOptions(jsonOpt));
 
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 //app.UseHttpsRedirection();
 
-app.MapPost("/reserve", async ([FromServices] DaprClient client, HttpContext context) =>
+app.MapPost("/reserve", ([FromServices] DaprClient client, [FromBody] Item item) =>
 {
     app.Logger.LogInformation("Enter Reservation");
-
-    // DaprClient could be used to interact with State store etc..
-    //var client = context.RequestServices.GetRequiredService<DaprClient>();
-    var item = await JsonSerializer.DeserializeAsync<Item>(context.Request.Body, jsonOpt);
-
-    // your business logic should be here
 
     /* a specific type is used in sample.microservice.reservation and not
     reused the class in sample.microservice.order with the same signature: 
     this is just to not introduce DTO and to suggest that it might be a good idea
     having each service separating the type for persisting store */
     Item storedItem;
-    // from store? state?
     storedItem = new Item();
     storedItem.SKU = item.SKU;
     storedItem.Quantity -= item.Quantity;
 
     app.Logger.LogInformation($"Reservation of {storedItem.SKU} is now {storedItem.Quantity}");
 
-    context.Response.ContentType = "application/json";
-    await JsonSerializer.SerializeAsync(context.Response.Body, storedItem, jsonOpt);
+    return Results.Ok(storedItem);
 });
 
 app.Run();
+
+public class Item
+{
+    public string? SKU {get; set;}
+
+    public int Quantity { get; set; }
+}

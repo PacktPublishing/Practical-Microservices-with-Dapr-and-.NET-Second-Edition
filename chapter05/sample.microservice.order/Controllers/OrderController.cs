@@ -1,73 +1,61 @@
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Net.Http;
-using Dapr;
-using Dapr.Client;
-using Microsoft.AspNetCore.Mvc;
-using sample.microservice.dto.order;
-using sample.microservice.dto.reservation;
-using sample.microservice.state.order;
+namespace sample.microservice.order.Controllers;
 
-namespace sample.microservice.order.Controllers
+[ApiController]
+public class OrderController : ControllerBase
 {
-    [ApiController]
-    public class OrderController : ControllerBase
+    public const string StoreName = "orderstore";
+
+    /// <summary>
+    /// Method for submitting a new order.
+    /// </summary>
+    /// <param name="order">Order info.</param>
+    /// <param name="daprClient">State client to interact with Dapr runtime.</param>
+    /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
+    [HttpPost("order")]
+    public async Task<ActionResult<Guid>> SubmitOrder(Order order, [FromServices] DaprClient daprClient)
     {
-        public const string StoreName = "orderstore";
+        Console.WriteLine("Enter submit order");
+        
+        order.Id = Guid.NewGuid();
 
-        /// <summary>
-        /// Method for submitting a new order.
-        /// </summary>
-        /// <param name="order">Order info.</param>
-        /// <param name="daprClient">State client to interact with Dapr runtime.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
-        [HttpPost("order")]
-        public async Task<ActionResult<Guid>> SubmitOrder(Order order, [FromServices] DaprClient daprClient)
+        var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
+        state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
+        
+        foreach (var item in order.Items)
         {
-            Console.WriteLine("Enter submit order");
-            
-            order.Id = Guid.NewGuid();
-
-            var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
-            state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
-            
-            foreach (var item in order.Items)
-            {
-                var data = new Item() { SKU = item.ProductCode, Quantity = item.Quantity };
-                var result = await daprClient.InvokeMethodAsync<Item, Item>(HttpMethod.Post, "reservation-service", "reserve", data);
-            }
-            
-            // Alternative approach with ETag for first-write-wins
-            // Console.WriteLine($"ETag {state.ETag}");
-            // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
-            // await state.SaveAsync(options);
-            await state.SaveAsync();
-
-            Console.WriteLine($"Submitted order {order.Id}");
-
-            return order.Id;
+            var data = new Item() { SKU = item.ProductCode, Quantity = item.Quantity };
+            var result = await daprClient.InvokeMethodAsync<Item, Item>(HttpMethod.Post, "reservation-service", "reserve", data);
         }
+        
+        // Alternative approach with ETag for first-write-wins
+        // Console.WriteLine($"ETag {state.ETag}");
+        // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
+        // await state.SaveAsync(options);
+        await state.SaveAsync();
 
-        /// <summary>
-        /// Method for retrieving an order.
-        /// </summary>
-        /// <param name="orderid">Order Id state info.</param>
-        /// <returns>Order information</returns>
-        [HttpGet("order/{state}")]
-        public ActionResult<Order> Get([FromState(StoreName)]StateEntry<OrderState> state)
+        Console.WriteLine($"Submitted order {order.Id}");
+
+        return order.Id;
+    }
+
+    /// <summary>
+    /// Method for retrieving an order.
+    /// </summary>
+    /// <param name="orderid">Order Id state info.</param>
+    /// <returns>Order information</returns>
+    [HttpGet("order/{state}")]
+    public ActionResult<Order> Get([FromState(StoreName)]StateEntry<OrderState> state)
+    {
+        Console.WriteLine("Enter order retrieval");
+        
+        if (state.Value == null)
         {
-            Console.WriteLine("Enter order retrieval");
-            
-            if (state.Value == null)
-            {
-                return this.NotFound();
-            }
-            var result = state.Value.Order;
-
-            Console.WriteLine($"Retrieved order {result.Id} ");
-
-            return result;
+            return this.NotFound();
         }
+        var result = state.Value.Order;
+
+        Console.WriteLine($"Retrieved order {result.Id} ");
+
+        return result;
     }
 }
