@@ -1,4 +1,7 @@
-POST http://localhost:5050/v1.0/bindings/twilio HTTP/1.1
+@baseUrl = localhost
+@orderservicePort = 5001
+@orderserviceDaprPort = 5010
+POST http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/bindings/twilio HTTP/1.1
 content-type: application/json
 
 {
