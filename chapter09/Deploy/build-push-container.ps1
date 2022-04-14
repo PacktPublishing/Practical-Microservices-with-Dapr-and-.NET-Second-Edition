@@ -1,12 +1,12 @@
-# bonus content
+# meant to be launched from the solution root folder
 # with this file you can build all the project docker images with version and tag
 # in addition it pushes the images to the container registry
 param (
     [string]$prefix = "davidebedin", 
     [string]$tag = "latest"
     )
-$builddate = "2021-04-25"
-$buildversion = "1.1"
+$builddate = "2022-04-14"
+$buildversion = "1.7"
 
 $container = "sample.microservice.order"
 $latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 
