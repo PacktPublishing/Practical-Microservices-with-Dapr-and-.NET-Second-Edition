@@ -2,7 +2,7 @@ namespace sample.microservice.reservationactor.service;
 
 internal class ReservationItemActor : Actor, IReservationItemActor, IRemindable
 {        
-    public const string StateName = "reservationitem";
+    public const string StateName = "reservationitemactorestore";
         
     /// <summary>
     /// Initializes a new instance of ReservationItemActor
