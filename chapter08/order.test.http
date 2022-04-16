@@ -90,8 +90,10 @@ GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method
 GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{erraticOrderId}}
 ###
 @reservationservicePort = 5002
-@reservationserviceDaprPort = 5014
+@reservationactorserviceDaprPort = 5014
 ###
-GET http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/actors/ReservationItemActor/rockiecookie/state/reservationitem
+GET http://{{baseUrl}}:{{reservationactorserviceDaprPort}}/v1.0/actors/ReservationItemActor/rockiecookie/state/reservationitem
+###
+GET http://{{baseUrl}}:{{reservationactorserviceDaprPort}}/v1.0/actors/ReservationItemActor/rockiecookie/method/GetBalance
 ###
 GET http://{{baseUrl}}:{{reservationservicePort}}/balance/rockiecookie

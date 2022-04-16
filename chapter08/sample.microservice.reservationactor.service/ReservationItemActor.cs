@@ -2,7 +2,7 @@ namespace sample.microservice.reservationactor.service;
 
 internal class ReservationItemActor : Actor, IReservationItemActor, IRemindable
 {        
-    public const string StateName = "reservationitemactorestore";
+    public const string StateKey = "reservationitem";
         
     /// <summary>
     /// Initializes a new instance of ReservationItemActor
@@ -38,7 +38,7 @@ internal class ReservationItemActor : Actor, IReservationItemActor, IRemindable
     {
         var SKU = this.Id.GetId();
 
-        var state = await this.StateManager.TryGetStateAsync<ItemState>(StateName);
+        var state = await this.StateManager.TryGetStateAsync<ItemState>(StateKey);
         ItemState value = state.HasValue ? state.Value : new ItemState() {SKU = SKU, Changes = new List<ItemReservation>() };
                     
         // update balance
@@ -54,7 +54,7 @@ internal class ReservationItemActor : Actor, IReservationItemActor, IRemindable
         // Data can also be saved explicitly by calling this.StateManager.SaveStateAsync();
         // State to be saved must be DataContract serializable.
         await this.StateManager.SetStateAsync<ItemState>(
-            StateName,  // state name
+            StateKey,  // state name
             value);      // data saved for the named state "my_data"
 
         Console.WriteLine($"Balance of {SKU} was {initialBalanceQuantity}, now {value.BalanceQuantity}");
@@ -65,7 +65,7 @@ internal class ReservationItemActor : Actor, IReservationItemActor, IRemindable
     public async Task<int> GetBalance()
     {
         // Gets state from the state store.
-        var state = await this.StateManager.GetStateAsync<ItemState>(StateName);
+        var state = await this.StateManager.GetStateAsync<ItemState>(StateKey);
         return state.BalanceQuantity;
     }
 
