@@ -4,7 +4,7 @@ param (
     [string]$prefix = "davidebedin", 
     [string]$tag = "latest"
     )
-$builddate = "2022-04-14"
+$builddate = "2022-04-30"
 $buildversion = "1.7"
 
 $container = "sample.microservice.order"

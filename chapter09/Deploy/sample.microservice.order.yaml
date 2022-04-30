@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.order:latest
+        image: daprk8scrdb.azurecr.io/sample.microservice.order:1.7
         ports:
         - containerPort: 80
         imagePullPolicy: Always

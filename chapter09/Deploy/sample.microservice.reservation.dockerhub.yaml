@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: reservation-service
-        image: davidebedin/sample.microservice.reservation:latest
+        image: davidebedin/sample.microservice.reservation:1.7
         ports:
         - containerPort: 80
         imagePullPolicy: Always

@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: reservation-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.reservation:latest
+        image: daprk8scrdb.azurecr.io/sample.microservice.reservation:1.7
         ports:
         - containerPort: 80
         imagePullPolicy: Always
