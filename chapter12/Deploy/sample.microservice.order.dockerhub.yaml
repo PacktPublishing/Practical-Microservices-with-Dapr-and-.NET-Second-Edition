@@ -22,8 +22,8 @@ spec:
         dapr.io/log-level: "info"
         dapr.io/sidecar-memory-request: "250Mi"
         dapr.io/sidecar-cpu-request: "100m"
-        dapr.io/sidecar-memory-limit: "4000Mi"
-        dapr.io/sidecar-cpu-limit: "1"
+        dapr.io/sidecar-memory-limit: "1000Mi"
+        dapr.io/sidecar-cpu-limit: "300m"
         dapr.io/sidecar-liveness-probe-period-seconds: "20"
         dapr.io/sidecar-readiness-probe-period-seconds: "20"
     spec:
