@@ -1,21 +1,58 @@
-POST http://localhost:5001/order HTTP/1.1
+@baseUrl = localhost
+@orderservicePort = 5001
+@orderserviceDaprPort = 5010
+###
+# @name simpleOrderRequest
+POST http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order HTTP/1.1
 content-type: application/json
 
 {
   "CustomerCode": "Davide",
-  "Date": "2020-09-19T08:47:53.1224585Z",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
   "Items": [
     {
       "ProductCode": "rockiecookie",
-      "Quantity": 2
+      "Quantity": {{$randomInt 2 8}}
     },
     {
-      "ProductCode": "bussola9",
-      "Quantity": 1
+      "ProductCode": "bussola{{$randomInt 1 100}}",
+      "Quantity": {{$randomInt 1 8}}
+    }
+  ],
+  "SpecialRequests" : [
+    {
+      "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
+      "Scope": 
+      {
+        "ProductCode": "rockiecookie",
+        "Quantity": 2
+      }
+    }
+  ]
+}
+###
+@orderId = {{simpleOrderRequest.response.body.$}}
+# get order from ASP.NET endpoint
+GET http://{{baseUrl}}:{{orderservicePort}}/order/{{orderId}}
+###
+# get order from Dapr endpoint invoking service
+GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order/{{orderId}} 
+###
+# @name erraticOrderRequest
+POST http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order HTTP/1.1
+content-type: application/json
+
+{
+  "CustomerCode": "Davide",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
+  "Items": [
+    {
+      "ProductCode": "rockiecookie",
+      "Quantity": {{$randomInt 2 8}}
     },
     {
-      "ProductCode": "bussola1",
-      "Quantity": 1
+      "ProductCode": "bussola8",
+      "Quantity": {{$randomInt 1 8}}
     },
     {
       "ProductCode": "crazycookie",
@@ -41,11 +78,22 @@ content-type: application/json
     }
   ]
 }
-### invoke method order via ASP.Net
-GET http://localhost:5001/order/00cbe10e-5282-4bf9-9e4c-4812a57ad520
-### invoke state order via Dapr
-GET http://localhost:5010/v1.0/state/orderstore/00cbe10e-5282-4bf9-9e4c-4812a57ad520
-### invoke method balance via ASP.NET
-GET http://localhost:5002/balance/rockiecookie HTTP/1.1
-### invoke method balance via Dapr
-GET http://localhost:5020/v1.0/invoke/reservation-service/method/balance/rockiecookie HTTP/1.1
+###
+@erraticOrderId = {{erraticOrderRequest.response.body.$}}
+# get order from ASP.NET endpoint
+GET http://{{baseUrl}}:{{orderservicePort}}/order/{{erraticOrderId}}
+###
+# get order from Dapr endpoint invoking service
+GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/invoke/order-service/method/order/{{erraticOrderId}} 
+###
+# get order from Dapr endpoint retrieving state 
+GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{erraticOrderId}}
+###
+@reservationservicePort = 5002
+@reservationactorserviceDaprPort = 5014
+###
+GET http://{{baseUrl}}:{{reservationactorserviceDaprPort}}/v1.0/actors/ReservationItemActor/rockiecookie/state/reservationitem
+###
+GET http://{{baseUrl}}:{{reservationactorserviceDaprPort}}/v1.0/actors/ReservationItemActor/rockiecookie/method/GetBalance
+###
+GET http://{{baseUrl}}:{{reservationservicePort}}/balance/rockiecookie
