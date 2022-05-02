@@ -5,8 +5,8 @@ param (
     [string]$prefix = "davidebedin", 
     [string]$tag = "latest"
     )
-$builddate = "2022-04-30"
-$buildversion = "1.7"
+$builddate = "2022-05-02"
+$buildversion = "2.0"
 
 $container = "sample.microservice.order"
 $latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 

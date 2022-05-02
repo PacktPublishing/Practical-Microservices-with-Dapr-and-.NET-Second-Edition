@@ -17,13 +17,15 @@ COPY . .
 WORKDIR "/src/sample.microservice.order"
 RUN dotnet publish "sample.microservice.order.csproj" -c Release -o /app/publish --no-restore
 
-ARG BUILD_DATE
-ARG BUILD_VERSION
-LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.version=$BUILD_VERSION
-LABEL org.label-schema.description="Practical Microservices with Dapr and .NET sample, Order microservice"
-
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "sample.microservice.order.dll"]
+
+ARG BUILD_DATE
+ARG BUILD_VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.version=$BUILD_VERSION
+LABEL org.label-schema.name = "Practical Microservices with Dapr and .NET - sample: order microservice"
+LABEL org.label-schema.description=".NET 6.0 and Dapr 1.7"
+LABEL org.label-schema.schema-version="1.0"

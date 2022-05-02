@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: customization-service
-        image: davidebedin/sample.microservice.customization:1.7
+        image: davidebedin/sample.microservice.customization:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

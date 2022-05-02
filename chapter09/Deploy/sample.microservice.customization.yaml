@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: customization-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.customization:1.7
+        image: daprk8scrdb.azurecr.io/sample.microservice.customization:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always
