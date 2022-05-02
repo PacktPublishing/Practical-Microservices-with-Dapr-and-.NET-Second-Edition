@@ -1,7 +1,7 @@
 # meant to be launched from the solution root folder
 # with this file you can build all the project docker images with version and tag
 param (
-    [string]$prefix = "davidebedin", 
+    [string]$prefix = "registry", 
     [string]$tag = "latest"
     )
 $builddate = "2022-05-02"
