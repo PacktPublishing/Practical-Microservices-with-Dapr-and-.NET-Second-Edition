@@ -14,9 +14,5 @@ kubectl apply -f .\Deploy\sample.microservice.reservationactor.yaml
 kubectl apply -f .\Deploy\sample.microservice.customization.yaml
 kubectl apply -f .\Deploy\sample.microservice.shipping.yaml
 
-# deploy service of applications ONLY if using classic NGINX --- NOT NEEDED if using NGINX + Dapr
-kubectl apply -f .\Deploy\service.sample.microservice.order.yaml
-kubectl apply -f .\Deploy\service.sample.microservice.reservation.yaml
-
 # a simple way to test if an application is working
 kubectl logs -l app=reservationactor-service -c reservationactor-service --namespace default -f
