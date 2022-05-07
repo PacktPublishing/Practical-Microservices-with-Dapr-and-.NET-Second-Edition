@@ -7,8 +7,7 @@ helm repo update
 # Use Helm to deploy an NGINX ingress controller
 helm install nginx-ingress ingress-nginx/ingress-nginx `
     --namespace $namespace `
-    --set controller.replicaCount=2 `
-    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="dapringress"
+    --set controller.replicaCount=1 `
 
 # verify
 kubectl --namespace $namespace get services -o wide -w nginx-ingress-ingress-nginx-controller

@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: order-service-ingress
@@ -6,18 +6,21 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$1/$2
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /bbmb/(order)
+      - path: /bbmb/(order)/(.*)
+        pathType: Prefix
         backend:
-          serviceName: order-service
-          servicePort: 80
+          service:
+            name: order-service
+            port: 
+              number: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: reservation-service-ingress
@@ -32,6 +35,9 @@ spec:
   - http:
       paths:
       - path: /bbmb/(balance)/(.*)
+        pathType: Prefix
         backend:
-          serviceName: reservation-service
-          servicePort: 80
+          service:
+            name: reservation-service
+            port: 
+              number: 80

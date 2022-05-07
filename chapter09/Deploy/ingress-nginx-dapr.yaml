@@ -1,26 +1,29 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: common-dapr-ingress
+  name: order-dapr-ingress
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /v1.0/invoke/order-service/method/order/$1
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /dapr/(.*)
+      - path: /order/(.*)
+        pathType: Prefix
         backend:
-          serviceName: nginx-ingress-dapr
-          servicePort: 80
+          service:
+            name: nginx-ingress-dapr
+            port: 
+              number: 80
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: balance-dapr-ingress
+  name: reservation-dapr-ingress
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -32,25 +35,9 @@ spec:
   - http:
       paths:
       - path: /balance/(.*)
+        pathType: Prefix
         backend:
-          serviceName: nginx-ingress-dapr
-          servicePort: 80
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: order-dapr-ingress
-  namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /v1.0/invoke/order-service/method/order/
-spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-      - path: /order
-        backend:
-          serviceName: nginx-ingress-dapr
-          servicePort: 80
+          service:
+            name: nginx-ingress-dapr
+            port: 
+              number: 80         
