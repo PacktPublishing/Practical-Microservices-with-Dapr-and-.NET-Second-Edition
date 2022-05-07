@@ -22,6 +22,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "sample.microservice.order.dll"]
 
+# workaround to https://github.com/dotnet/dotnet-docker/issues/3274
 ARG Logging__Console__FormatterName=""
 ENV Logging__Console__FormatterName=$Logging__Console__FormatterName
 
