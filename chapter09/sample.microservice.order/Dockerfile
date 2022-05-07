@@ -22,6 +22,9 @@ WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "sample.microservice.order.dll"]
 
+ARG Logging__Console__FormatterName=""
+ENV Logging__Console__FormatterName=$Logging__Console__FormatterName
+
 ARG BUILD_DATE
 ARG BUILD_VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE
