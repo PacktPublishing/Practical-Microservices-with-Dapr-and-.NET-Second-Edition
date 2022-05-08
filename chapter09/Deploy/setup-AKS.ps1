@@ -6,7 +6,7 @@ $location = ""
 az account set --subscription $subscription
 
 # create RG
-az group create --name $askname  --location $location
+az group create --name $$rg  --location $location
 
 # create AKS --- no cluster autoscaler https://docs.microsoft.com/en-us/azure/aks/start-stop-cluster  
 az aks create --resource-groue $rg --name $askname  `
