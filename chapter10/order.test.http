@@ -1,7 +1,7 @@
 @baseUrl = x.y.z.k
 ###
 # @name simpleOrderRequest
-POST http://{{baseUrl}}/bbmb/order/ HTTP/1.1
+POST http://{{baseUrl}}/order/ HTTP/1.1
 content-type: application/json
 
 {
@@ -31,13 +31,13 @@ content-type: application/json
 ###
 @orderId = {{simpleOrderRequest.response.body.$}}
 # get order from ASP.NET endpoint
-GET http://{{baseUrl}}/bbmb/order/{{orderId}}
+GET http://{{baseUrl}}/order/{{orderId}}
 ###
 # get balance for a cookie
-GET http://{{baseUrl}}/bbmb/balance/rockiecookie
+GET http://{{baseUrl}}/balance/rockiecookie
 ###
 # @name erraticOrderRequest
-POST http://{{baseUrl}}/bbmb/order HTTP/1.1
+POST http://{{baseUrl}}/order/ HTTP/1.1
 content-type: application/json
 
 {
@@ -79,8 +79,8 @@ content-type: application/json
 ###
 @erraticOrderId = {{erraticOrderRequest.response.body.$}}
 # get order from ASP.NET endpoint
-GET http://{{baseUrl}}/bbmb/order/{{erraticOrderId}}
+GET http://{{baseUrl}}/order/{{erraticOrderId}}
 ###
 # get balance for a cookie
-GET http://{{baseUrl}}/bbmb/balance/crazycookie
+GET http://{{baseUrl}}/balance/crazycookie
 ###
