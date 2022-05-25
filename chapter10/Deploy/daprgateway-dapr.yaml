@@ -1,0 +1,75 @@
+# NOTE: Before deploying to a production environment, please review the documentation -> https://aka.ms/self-hosted-gateway-production
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: daprgateway-env
+data:
+  config.service.endpoint: "REPLACE"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: daprgateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: daprgateway
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 25%
+  template:
+    metadata:
+      labels:
+        app: daprgateway
+      annotations:
+          dapr.io/enabled: "true"
+          dapr.io/app-id: "apim"
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: daprgateway
+        image: mcr.microsoft.com/azure-api-management/gateway:v2
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /REPLACE
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: config.service.auth
+          valueFrom:
+            secretKeyRef:
+              name: daprgateway-token
+              key: value
+        envFrom:
+        - configMapRef:
+            name: daprgateway-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daprgateway
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8081
+  selector:
+    app: daprgateway
