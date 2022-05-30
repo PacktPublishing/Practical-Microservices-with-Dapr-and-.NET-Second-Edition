@@ -1,8 +1,11 @@
-@baseUrl = x.y.z.k
+@baseUrl = x.y.z.k/api
+@subscriptionId = REPLACE
 ###
 # @name simpleOrderRequest
-POST http://{{baseUrl}}/order/ HTTP/1.1
+POST https://{{baseUrl}}/order/ HTTP/1.1
 content-type: application/json
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
 
 {
   "CustomerCode": "Davide",
@@ -31,14 +34,22 @@ content-type: application/json
 ###
 @orderId = {{simpleOrderRequest.response.body.$}}
 # get order from ASP.NET endpoint
-GET http://{{baseUrl}}/order/{{orderId}}
+GET https://{{baseUrl}}/order/{{orderId}}
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
+
 ###
 # get balance for a cookie
-GET http://{{baseUrl}}/balance/rockiecookie
+GET https://{{baseUrl}}/balance/rockiecookie
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
+
 ###
 # @name erraticOrderRequest
 POST http://{{baseUrl}}/order/ HTTP/1.1
 content-type: application/json
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
 
 {
   "CustomerCode": "Davide",
@@ -80,7 +91,13 @@ content-type: application/json
 @erraticOrderId = {{erraticOrderRequest.response.body.$}}
 # get order from ASP.NET endpoint
 GET http://{{baseUrl}}/order/{{erraticOrderId}}
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
+
 ###
 # get balance for a cookie
-GET http://{{baseUrl}}/balance/crazycookie
+GET https://{{baseUrl}}/balance/crazycookie
+Ocp-Apim-Trace: True
+Ocp-Apim-Subscription-Key: {{subscriptionId}}
+
 ###

@@ -1,0 +1,177 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "properties": {
+        "description": "Biscotti Brutti ma Buoni",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "BBmB API",
+        "path": "api",
+        "protocols": [
+          "http",
+          "https"
+        ]
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api')]",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "templateParameters": [
+          {
+            "name": "sku",
+            "type": "",
+            "required": true,
+            "values": []
+          }
+        ],
+        "description": "",
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": []
+        },
+        "responses": [],
+        "displayName": "GetBalance",
+        "method": "GET",
+        "urlTemplate": "/balance/{sku}"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/getbalance')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\n    - Policies are applied in the order of their appearance, from the top down.\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service backend-id=\"dapr\" dapr-app-id=\"reservation-service\" dapr-method=\"@(String.Format(\"balance/{0}\", context.Request.MatchedParameters[\"sku\"]))\" dapr-namespace=\"default\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/getbalance/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'api', 'getbalance')]"
+      ]
+    },
+    {
+      "properties": {
+        "templateParameters": [
+          {
+            "name": "orderId",
+            "type": "",
+            "required": true,
+            "values": []
+          }
+        ],
+        "description": "",
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": []
+        },
+        "responses": [],
+        "displayName": "GetOrder",
+        "method": "GET",
+        "urlTemplate": "/order/{orderId}"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/getorder')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\n    - Policies are applied in the order of their appearance, from the top down.\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service backend-id=\"dapr\" dapr-app-id=\"order-service\" dapr-method=\"@(String.Format(\"order/{0}\", context.Request.MatchedParameters[\"orderId\"]))\" dapr-namespace=\"default\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/getorder/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'api', 'getorder')]"
+      ]
+    },
+    {
+      "properties": {
+        "templateParameters": [],
+        "description": "",
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": []
+        },
+        "responses": [],
+        "displayName": "PostOrder",
+        "method": "POST",
+        "urlTemplate": "/order"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/postorder')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\n    - Policies are applied in the order of their appearance, from the top down.\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t\t<set-backend-service backend-id=\"dapr\" dapr-app-id=\"order-service\" dapr-method=\"order\" />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/postorder/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'api', 'postorder')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<!--\n    IMPORTANT:\n    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.\n    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.\n    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.\n    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.\n    - To remove a policy, delete the corresponding policy statement from the policy document.\n    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.\n    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.\n    - Policies are applied in the order of their appearance, from the top down.\n    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.\n-->\r\n<policies>\r\n\t<inbound>\r\n\t\t<base />\r\n\t</inbound>\r\n\t<backend>\r\n\t\t<base />\r\n\t</backend>\r\n\t<outbound>\r\n\t\t<base />\r\n\t</outbound>\r\n\t<on-error>\r\n\t\t<base />\r\n\t</on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/api/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('ApimServiceName'), '/starter/api')]",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('ApimServiceName'), '/unlimited/api')]",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'api')]"
+      ]
+    }
+  ]
+}
