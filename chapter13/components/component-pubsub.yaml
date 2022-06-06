@@ -3,4 +3,4 @@
   version: v1
   metadata:
   - name: connectionString
-    secretRef: reservationpubsub-servicebus-connectionstring
+    secretRef: pubsub-servicebus-connectionstring
