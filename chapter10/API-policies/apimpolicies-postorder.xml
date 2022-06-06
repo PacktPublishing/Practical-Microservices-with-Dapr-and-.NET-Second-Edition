@@ -13,7 +13,7 @@
 <policies>
     <inbound>
         <base />
-        <set-backend-service backend-id="dapr" dapr-app-id="reservation-service" dapr-method="@(String.Format("balance/{0}", context.Request.MatchedParameters["sku"]))" dapr-namespace="default" />
+        <set-backend-service backend-id="dapr" dapr-app-id="order-service" dapr-method="order" />
     </inbound>
     <backend>
         <base />
