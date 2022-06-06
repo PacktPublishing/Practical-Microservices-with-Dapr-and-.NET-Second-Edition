@@ -1,0 +1,6 @@
+- name: commonpubsub
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+  - name: connectionString
+    secretRef: reservationpubsub-servicebus-connectionstring
