@@ -1,6 +1,11 @@
-- name: commonpubsub
-  type: pubsub.azure.servicebus
-  version: v1
-  metadata:
-  - name: connectionString
-    secretRef: pubsub-servicebus-connectionstring
+name: commonpubsub
+type: pubsub.azure.servicebus
+version: v1
+metadata:
+- name: connectionString
+  secretRef: pubsub-servicebus-connectionstring
+  value : ""
+scopes: []
+secrets:
+- name: pubsub-servicebus-connectionstring
+  value: SECRET
