@@ -98,12 +98,25 @@ az containerapp create `
 --environment $CONTAINERAPPS_ENVIRONMENT `
 --image ($REGISTRY_NAME + "/sample.microservice.order:2.0") `
 --target-port 80 `
---ingress 'external' `
+--ingress 'internal' `
 --min-replicas 1 `
 --max-replicas 1 `
 --enable-dapr `
 --dapr-app-port 80 `
 --dapr-app-id order-service
+
+az containerapp create `
+--name t1-proxy `
+--resource-group $RESOURCE_GROUP `
+--environment $CONTAINERAPPS_ENVIRONMENT `
+--image ($REGISTRY_NAME + "/sample.proxy:0.1") `
+--target-port 80 `
+--ingress 'external' `
+--min-replicas 1 `
+--max-replicas 1 `
+--enable-dapr `
+--dapr-app-port 80 `
+--dapr-app-id proxy-service
 
 $ORDER_BASE_URL = (az containerapp show --resource-group $RESOURCE_GROUP --name t1-order --query "latestRevisionFqdn" -o tsv)
 

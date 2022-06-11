@@ -84,3 +84,9 @@ content-type: application/json
 ###
 @orderId = {{simpleOrderRequest.response.body.$}}
 GET https://{{baseUrl}}/order/{{orderId}} HTTP/1.1
+
+
+###  
+GET https://{{baseUrl}}/order/966a1dd8-3220-42d8-b0cb-979e600a4915
+###
+GET https://{{baseUrl}}/balance/bussola1

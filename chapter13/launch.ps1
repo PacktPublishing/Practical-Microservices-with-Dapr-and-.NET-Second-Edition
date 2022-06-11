@@ -1,0 +1,1 @@
+dapr run --app-id "yarp-service" --app-port "5005" --dapr-grpc-port "50050" --dapr-http-port "5050" -- dotnet run --project ./sample.proxy/sample.proxy.csproj --urls="http://+:5005"
