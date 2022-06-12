@@ -5,7 +5,11 @@ metadata:
 - name: connectionString
   secretRef: pubsub-servicebus-connectionstring
   value : ""
-scopes: []
+scopes: 
+- order-service
+- reservation-service
+- reservationactor-service
+- customization-service
 secrets:
 - name: pubsub-servicebus-connectionstring
   value: SECRET

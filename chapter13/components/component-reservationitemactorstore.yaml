@@ -14,7 +14,8 @@ metadata:
   value: reservationitemactorstate
 - name: actorStateStore
   value: "true"
-scopes: []
+scopes: 
+- customization-service
 secrets:
 - name: reservationitemactorstore-cosmosdb-url
   value: SECRET

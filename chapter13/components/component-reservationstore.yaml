@@ -12,7 +12,8 @@ metadata:
   value: state
 - name: collection
   value: reservationstate
-scopes: []
+scopes: 
+- reservation-service
 secrets:
 - name: reservationstore-cosmosdb-url
   value: SECRET

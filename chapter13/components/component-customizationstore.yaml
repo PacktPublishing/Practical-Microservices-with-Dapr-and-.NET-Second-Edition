@@ -12,7 +12,8 @@ metadata:
   value: state
 - name: collection
   value: customizationstate
-scopes: []
+scopes: 
+- customization-service
 secrets:
 - name: customizationstore-cosmosdb-url
   value: SECRET

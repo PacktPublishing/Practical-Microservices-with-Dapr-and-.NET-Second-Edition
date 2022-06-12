@@ -12,7 +12,8 @@ metadata:
   value: state
 - name: collection
   value: orderstate
-scopes: []
+scopes: 
+- order-service
 secrets:
 - name: orderstore-cosmosdb-url
   value: SECRET
