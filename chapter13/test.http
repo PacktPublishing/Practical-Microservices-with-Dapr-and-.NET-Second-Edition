@@ -1,7 +1,7 @@
 ###
+@baseUrl = x.y.z.k
 # problematic order
 # @name erraticOrderRequest
-@baseUrl = x.y.z.k
 POST https://{{baseUrl}}/order HTTP/1.1
 content-type: application/json
 
@@ -50,8 +50,9 @@ content-type: application/json
   ]
 }
 ###
-@orderId = {{erraticOrderRequest.response.body.$}}
-GET https://{{baseUrl}}/order/{{orderId}} HTTP/1.1
+@erraticOrderId = {{erraticOrderRequest.response.body.$}}
+# get problematic order
+GET https://{{baseUrl}}/order/{{erraticOrderId}} HTTP/1.1
 ###
 # NON problematic order
 # @name simpleOrderRequest
