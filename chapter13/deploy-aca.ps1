@@ -2,13 +2,15 @@
 $CONTAINERAPPS_ENVIRONMENT = ""
 $RESOURCE_GROUP = ""
 $REGISTRY_NAME = ""
-$APPLICATIONINSIGHTS_KEY = ""
+$APPLICATIONINSIGHTS_NAME = ""
 $LOG_ANALYTICS_WORKSPACE = ""
 $LOCATION = ""
 $COMPONENT_PATH = ""
 
 $LOG_ANALYTICS_WORKSPACE_CLIENT_ID=(az monitor log-analytics workspace show --query customerId -g $RESOURCE_GROUP -n $LOG_ANALYTICS_WORKSPACE --out tsv)
 $LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=(az monitor log-analytics workspace get-shared-keys --query primarySharedKey -g $RESOURCE_GROUP -n $LOG_ANALYTICS_WORKSPACE -o tsv)
+$APPLICATIONINSIGHTS_KEY = (az resource show -g $RESOURCE_GROUP -n $APPLICATIONINSIGHTS_NAME --resource-type "microsoft.insights/components" --query properties.InstrumentationKey -o tsv)
+
 
 az containerapp env create `
 --name $CONTAINERAPPS_ENVIRONMENT `
