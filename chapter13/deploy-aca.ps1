@@ -11,6 +11,9 @@ $LOG_ANALYTICS_WORKSPACE_CLIENT_ID=(az monitor log-analytics workspace show --qu
 $LOG_ANALYTICS_WORKSPACE_CLIENT_SECRET=(az monitor log-analytics workspace get-shared-keys --query primarySharedKey -g $RESOURCE_GROUP -n $LOG_ANALYTICS_WORKSPACE -o tsv)
 $APPLICATIONINSIGHTS_KEY = (az resource show -g $RESOURCE_GROUP -n $APPLICATIONINSIGHTS_NAME --resource-type "microsoft.insights/components" --query properties.InstrumentationKey -o tsv)
 
+# https://docs.microsoft.com/en-us/azure/container-apps/get-started-existing-container-image?tabs=powershell&pivots=container-apps-public-registry
+az extension add --name containerapp --upgrade
+az provider register --namespace Microsoft.App
 
 az containerapp env create `
 --name $CONTAINERAPPS_ENVIRONMENT `
