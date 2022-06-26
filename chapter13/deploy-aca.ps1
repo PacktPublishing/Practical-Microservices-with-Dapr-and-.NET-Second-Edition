@@ -104,7 +104,7 @@ az containerapp create `
 --name t1-proxy `
 --resource-group $RESOURCE_GROUP `
 --environment $CONTAINERAPPS_ENVIRONMENT `
---image ($REGISTRY_NAME + "/sample.proxy:0.1") `
+--image ($REGISTRY_NAME + "/sample.proxy:0.1.2") `
 --target-port 80 `
 --ingress 'external' `
 --min-replicas 1 `
