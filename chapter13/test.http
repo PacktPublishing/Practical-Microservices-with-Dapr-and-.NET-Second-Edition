@@ -1,4 +1,3 @@
-###
 @baseUrl = x.y.z.k
 ###
 GET https://{{baseUrl}}/balance/bussola1
