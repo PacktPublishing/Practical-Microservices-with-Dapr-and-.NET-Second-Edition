@@ -116,5 +116,8 @@ az containerapp create `
 # how to get the base url of the proxy service?
 $BASE_URL = (az containerapp show --resource-group $RESOURCE_GROUP --name t1-proxy --query "properties.configuration.ingress.fqdn" -o tsv)
 
+# list all container apps in resource group 
 az containerapp list `
---resource-group $RESOURCE_GROUP
+--resource-group $RESOURCE_GROUP `
+--query "[].{Name:name, Provisioned:properties.provisioningState, Image:properties.template.containers[0].image}" `
+-o table
