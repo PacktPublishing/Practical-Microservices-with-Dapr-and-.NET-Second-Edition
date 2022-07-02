@@ -11,13 +11,17 @@ COPY . .
 WORKDIR "/src/sample.microservice.shipping"
 RUN dotnet publish "sample.microservice.shipping.csproj" -c Release -o /app/publish --no-restore
 
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "sample.microservice.shipping.dll"]
+
+# workaround to https://github.com/dotnet/dotnet-docker/issues/3274
+ARG Logging__Console__FormatterName=""
+ENV Logging__Console__FormatterName=$Logging__Console__FormatterName
+
 ARG BUILD_DATE
 ARG BUILD_VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.version=$BUILD_VERSION
 LABEL org.label-schema.description="Practical Microservices with Dapr and .NET sample, Shipping microservice"
-
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /app
-COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "sample.microservice.shipping.dll"]

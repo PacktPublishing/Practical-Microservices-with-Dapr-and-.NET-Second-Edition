@@ -1,0 +1,21 @@
+name: customizationstore
+componentType: state.azure.cosmosdb
+version: v1
+metadata:  
+- name: url
+  secretRef: customizationstore-cosmosdb-url
+  value : ""
+- name: masterKey
+  secretRef: customizationstore-cosmosdb-masterkey
+  value : ""
+- name: database
+  value: state
+- name: collection
+  value: customizationstate
+scopes: 
+- customization-service
+secrets:
+- name: customizationstore-cosmosdb-url
+  value: SECRET
+- name: customizationstore-cosmosdb-masterkey
+  value: SECRET

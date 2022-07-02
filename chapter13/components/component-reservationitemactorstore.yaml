@@ -1,0 +1,23 @@
+name: reservationitemactorstore
+componentType: state.azure.cosmosdb
+version: v1
+metadata:  
+- name: url
+  secretRef: reservationitemactorstore-cosmosdb-url
+  value : ""
+- name: masterKey
+  secretRef: reservationitemactorstore-cosmosdb-masterkey
+  value : ""
+- name: database
+  value: state
+- name: collection
+  value: reservationitemactorstate
+- name: actorStateStore
+  value: "true"
+scopes: 
+- reservationactor-service
+secrets:
+- name: reservationitemactorstore-cosmosdb-url
+  value: SECRET
+- name: reservationitemactorstore-cosmosdb-masterkey
+  value: SECRET

@@ -1,0 +1,15 @@
+name: commonpubsub
+type: pubsub.azure.servicebus
+version: v1
+metadata:
+- name: connectionString
+  secretRef: pubsub-servicebus-connectionstring
+  value : ""
+scopes: 
+- order-service
+- reservation-service
+- reservationactor-service
+- customization-service
+secrets:
+- name: pubsub-servicebus-connectionstring
+  value: SECRET

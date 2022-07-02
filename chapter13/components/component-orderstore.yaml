@@ -1,0 +1,21 @@
+name: orderstore
+componentType: state.azure.cosmosdb
+version: v1
+metadata:  
+- name: url
+  secretRef: orderstore-cosmosdb-url
+  value : ""
+- name: masterKey
+  secretRef: orderstore-cosmosdb-masterkey
+  value : ""
+- name: database
+  value: state
+- name: collection
+  value: orderstate
+scopes: 
+- order-service
+secrets:
+- name: orderstore-cosmosdb-url
+  value: SECRET
+- name: orderstore-cosmosdb-masterkey
+  value: SECRET
