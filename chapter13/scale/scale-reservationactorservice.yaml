@@ -1,0 +1,16 @@
+properties:
+  template:
+    scale:
+      minReplicas: 1
+      maxReplicas: 5
+      rules:
+      - name: httpscale
+        http:
+          metadata:
+            concurrentRequests: '1'
+      - name: cpuscalerule
+        custom:
+          type: cpu
+          metadata:
+            type: averagevalue
+            value: '60'

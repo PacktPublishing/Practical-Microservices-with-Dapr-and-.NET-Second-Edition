@@ -2,7 +2,7 @@ properties:
   template:
     scale:
       minReplicas: 1
-      maxReplicas: 5
+      maxReplicas: 3
       rules:
       - name: servicebus
         custom:
@@ -10,7 +10,7 @@ properties:
           metadata:
             topicName: daprsample
             subscriptionName: onorder_submitted
-            messageCount: 5
+            messageCount: 7
           auth:
             - secretRef: pubsub-secret
               triggerParameter: connection
