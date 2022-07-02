@@ -55,5 +55,5 @@ az containerapp revision copy `
 az containerapp revision copy `
 --name t1-customization `
 --resource-group $RESOURCE_GROUP `
---yaml .\scale\scale-customizationervice.yaml
+--yaml .\scale\scale-customizationservice.yaml
 
