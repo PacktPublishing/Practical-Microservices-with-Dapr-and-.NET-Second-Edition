@@ -1,0 +1,16 @@
+properties:
+  template:
+    scale:
+      minReplicas: 1
+      maxReplicas: 5
+      rules:
+      - name: servicebus
+        custom:
+          type: azure-servicebus
+          metadata:
+            topicName: daprsample
+            subscriptionName: onorder_submitted
+            messageCount: 5
+          auth:
+            - secretRef: sec
+              triggerParameter: connection
