@@ -8,8 +8,8 @@ properties:
         custom:
           type: azure-servicebus
           metadata:
-            topicName: daprsample
-            subscriptionName: onorder_submitted
+            topicName: onorder_submitted
+            subscriptionName: reservation-service
             messageCount: 5
           auth:
             - secretRef: pubsub-secret
