@@ -4,13 +4,19 @@ properties:
       minReplicas: 1
       maxReplicas: 5
       rules:
+      - name: cpuscalerule
+        custom:
+          type: cpu
+          metadata:
+            type: averagevalue
+            value: '70'      
       - name: servicebus
         custom:
           type: azure-servicebus
           metadata:
             topicName: onorder_submitted
             subscriptionName: reservation-service
-            messageCount: 5
+            messageCount: 10
           auth:
             - secretRef: pubsub-secret
               triggerParameter: connection

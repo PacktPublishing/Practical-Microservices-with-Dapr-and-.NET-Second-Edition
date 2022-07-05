@@ -57,6 +57,8 @@ az containerapp create `
   --ingress 'internal' `
   --min-replicas 1 `
   --max-replicas 1 `
+  --cpu 0.25 `
+  --memory 0.5 `
   --enable-dapr `
   --dapr-app-port 80 `
   --dapr-app-id reservationactor-service
@@ -70,6 +72,8 @@ az containerapp create `
   --ingress 'internal' `
   --min-replicas 1 `
   --max-replicas 1 `
+  --cpu 0.25 `
+  --memory 0.5 `
   --enable-dapr `
   --dapr-app-port 80 `
   --dapr-app-id reservation-service 
@@ -83,6 +87,8 @@ az containerapp create `
   --ingress 'internal' `
   --min-replicas 1 `
   --max-replicas 1 `
+  --cpu 0.25 `
+  --memory 0.5 `
   --enable-dapr `
   --dapr-app-port 80 `
   --dapr-app-id customization-service
@@ -96,6 +102,8 @@ az containerapp create `
 --ingress 'internal' `
 --min-replicas 1 `
 --max-replicas 1 `
+--cpu 0.25 `
+--memory 0.5 `
 --enable-dapr `
 --dapr-app-port 80 `
 --dapr-app-id order-service
@@ -109,6 +117,8 @@ az containerapp create `
 --ingress 'external' `
 --min-replicas 1 `
 --max-replicas 1 `
+--cpu 0.25 `
+--memory 0.5 `
 --enable-dapr `
 --dapr-app-port 80 `
 --dapr-app-id proxy-service

@@ -1,7 +1,7 @@
 $CONTAINERAPPS_ENVIRONMENT = ""
 $RESOURCE_GROUP = ""
 $CONTAINERAPP_REVISION = ""
-$CONTAINERAPP_NAME = "t1-reservationactor"
+$CONTAINERAPP_NAME = "t1-reservation"
 
 az containerapp revision list `
     --name $CONTAINERAPP_NAME `

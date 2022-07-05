@@ -26,11 +26,6 @@ az containerapp secret set `
 --resource-group $RESOURCE_GROUP `
 --secrets pubsub-secret=$SB_CONNECTION_STRING
 
-az containerapp secret set `
---name t1-customization `
---resource-group $RESOURCE_GROUP `
---secrets pubsubconnectionstring=$SB_CONNECTION_STRING
-
 # to create a new revision, deriving from the lastest, with some additional changes
 az containerapp revision copy `
 --name t1-proxy `

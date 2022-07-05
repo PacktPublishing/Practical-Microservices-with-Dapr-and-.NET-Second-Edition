@@ -2,7 +2,7 @@ properties:
   template:
     scale:
       minReplicas: 1
-      maxReplicas: 5
+      maxReplicas: 10
       rules:
       - name: httpscale
         http:
@@ -13,4 +13,10 @@ properties:
           type: cpu
           metadata:
             type: averagevalue
-            value: '60'
+            value: '70'
+      - name: memoryscalerule
+        custom:
+          type: memory
+          metadata:
+            type: utilization
+            value: '50'

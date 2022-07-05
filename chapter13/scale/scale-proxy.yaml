@@ -1,5 +1,11 @@
 properties:
   template:
+    containers:
+    - name: t1-proxy
+      image: 'davidebedin/sample.proxy:0.1.4'
+      resources:
+        cpu: 0.25
+        memory: 0.5Gi 
     scale:
       minReplicas: 1
       maxReplicas: 4
@@ -13,4 +19,4 @@ properties:
           type: cpu
           metadata:
             type: averagevalue
-            value: '75'
+            value: '50'

@@ -2,7 +2,7 @@ properties:
   template:
     scale:
       minReplicas: 1
-      maxReplicas: 3
+      maxReplicas: 4
       rules:
       - name: httpscale
         http:
@@ -13,4 +13,4 @@ properties:
           type: cpu
           metadata:
             type: averagevalue
-            value: '80'
+            value: '50'
