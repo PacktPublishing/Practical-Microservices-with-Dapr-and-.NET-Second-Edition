@@ -1,13 +1,7 @@
 properties:
   template:
-    containers:
-    - name: t1-proxy
-      image: 'davidebedin/sample.proxy:0.1.4'
-      resources:
-        cpu: 0.25
-        memory: 0.5Gi 
     scale:
-      minReplicas: 1
+      minReplicas: 2
       maxReplicas: 4
       rules:
       - name: httpscale

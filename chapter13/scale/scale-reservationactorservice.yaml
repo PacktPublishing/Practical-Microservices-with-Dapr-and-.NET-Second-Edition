@@ -1,22 +1,12 @@
 properties:
   template:
     scale:
-      minReplicas: 1
+      minReplicas: 3
       maxReplicas: 10
       rules:
-      - name: httpscale
-        http:
-          metadata:
-            concurrentRequests: '1'
-      - name: cpuscalerule
-        custom:
-          type: cpu
-          metadata:
-            type: averagevalue
-            value: '70'
       - name: memoryscalerule
         custom:
           type: memory
           metadata:
             type: utilization
-            value: '50'
+            value: 50

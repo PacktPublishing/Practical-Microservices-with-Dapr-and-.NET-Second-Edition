@@ -1,15 +1,9 @@
 properties:
   template:
     scale:
-      minReplicas: 1
-      maxReplicas: 5
+      minReplicas: 2
+      maxReplicas: 8
       rules:
-      - name: cpuscalerule
-        custom:
-          type: cpu
-          metadata:
-            type: averagevalue
-            value: '70'      
       - name: servicebus
         custom:
           type: azure-servicebus
