@@ -7,7 +7,7 @@ properties:
       - name: httpscale
         http:
           metadata:
-            concurrentRequests: '1'
+            concurrentRequests: '10'
       - name: cpuscalerule
         custom:
           type: cpu

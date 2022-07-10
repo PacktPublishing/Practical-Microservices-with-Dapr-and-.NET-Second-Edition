@@ -7,3 +7,5 @@ content-type: application/json
   "SKU": "cookie586",  
   "Quantity": 1 
 }
+###
+GET https://{{baseUrl}}/balance/cookie586
