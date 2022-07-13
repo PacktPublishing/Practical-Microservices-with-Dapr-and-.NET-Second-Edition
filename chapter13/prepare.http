@@ -1,0 +1,11 @@
+@baseUrl = x.y.z.k
+
+POST https://{{baseUrl}}/refill/  HTTP/1.1
+content-type: application/json
+
+{  
+  "SKU": "cookie586",  
+  "Quantity": 1 
+}
+###
+GET https://{{baseUrl}}/balance/cookie586

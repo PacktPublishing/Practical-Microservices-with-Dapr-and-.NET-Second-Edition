@@ -1,8 +1,8 @@
 properties:
   template:
     scale:
-      minReplicas: 1
-      maxReplicas: 5
+      minReplicas: 2
+      maxReplicas: 8
       rules:
       - name: servicebus
         custom:
@@ -10,7 +10,7 @@ properties:
           metadata:
             topicName: onorder_submitted
             subscriptionName: reservation-service
-            messageCount: 5
+            messageCount: 10
           auth:
             - secretRef: pubsub-secret
               triggerParameter: connection

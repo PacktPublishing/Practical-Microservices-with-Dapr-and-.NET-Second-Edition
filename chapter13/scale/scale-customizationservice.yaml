@@ -10,7 +10,7 @@ properties:
           metadata:
             topicName: onreservation_completed
             subscriptionName: customization-service
-            messageCount: 7
+            messageCount: 5
           auth:
             - secretRef: pubsub-secret
               triggerParameter: connection

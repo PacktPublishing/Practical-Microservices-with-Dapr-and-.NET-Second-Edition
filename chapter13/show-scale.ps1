@@ -1,7 +1,7 @@
 $CONTAINERAPPS_ENVIRONMENT = ""
 $RESOURCE_GROUP = ""
 $CONTAINERAPP_REVISION = ""
-$CONTAINERAPP_NAME = "t1-reservationactor"
+$CONTAINERAPP_NAME = "t1-reservation"
 
 az containerapp revision list `
     --name $CONTAINERAPP_NAME `
@@ -9,11 +9,10 @@ az containerapp revision list `
     --query '[].{Revision:name}' `
     --output table
 
-$CONTAINERAPP_REVISION = (az containerapp revision list --name $CONTAINERAPP_NAME --resource-group $RESOURCE_GROUP --query '[].name' --output tsv)
+$CONTAINERAPP_REVISION = (az containerapp revision list --name $CONTAINERAPP_NAME --resource-group $RESOURCE_GROUP --query '[?properties.active] [].name' --output tsv)
 
 az containerapp revision show `
-    --name $CONTAINERAPP_REVISION `
-    --app $CONTAINERAPP_NAME `
+    --revision $CONTAINERAPP_REVISION `
     --resource-group $RESOURCE_GROUP `
-    --query '{Replicas:replicas, Max:template.scale.maxReplicas, Min:template.scale.minReplicas}' `
+    --query '{Replicas:properties.replicas, Max:properties.template.scale.maxReplicas, Min:properties.template.scale.minReplicas}' `
     --output table
