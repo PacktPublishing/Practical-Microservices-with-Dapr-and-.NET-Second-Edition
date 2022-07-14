@@ -45,14 +45,14 @@ def RandomOrder():
 class APIUser(HttpUser):
     wait_time = between(0.1, 1) # seconds
 
-    @task(50)
+    @task(30)
     def getbalance(self):
         SKU = RandomSKU()
         with self.client.get("/balance/%s" % SKU, name="balance", catch_response=True) as response:
            if (not(response.status_code == 201 or 200)):
                     response.failure("Error balance: %s" % response.text)
 
-    @task(1)
+    @task(10)
     def postorder(self):
         http_headers = {'content-type': 'application/json'}
         payload = RandomOrder()
