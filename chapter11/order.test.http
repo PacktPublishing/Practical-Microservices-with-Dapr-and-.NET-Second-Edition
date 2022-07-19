@@ -1,23 +1,20 @@
-GET http://url/bbmb/balance/crazycookie HTTP/1.1
+@baseUrl = x.y.z.k
 ###
-POST http://url/bbmb/order HTTP/1.1
+# @name erraticOrderRequest
+POST http://{{baseUrl}}/order/ HTTP/1.1
 content-type: application/json
 
 {
   "CustomerCode": "Davide",
-  "Date": "2020-09-19T08:47:53.1224585Z",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
   "Items": [
     {
-      "ProductCode": "rockiecookie{{$randomInt 1 10}}",
-      "Quantity": 4
+      "ProductCode": "rockiecookie",
+      "Quantity": {{$randomInt 2 8}}
     },
     {
-      "ProductCode": "bussola{{$randomInt 1 10}}",
-      "Quantity": 7
-    },
-    {
-      "ProductCode": "bussola1",
-      "Quantity": 2
+      "ProductCode": "bussola8",
+      "Quantity": {{$randomInt 1 8}}
     },
     {
       "ProductCode": "crazycookie",
@@ -29,7 +26,7 @@ content-type: application/json
       "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
       "Scope": 
       {
-        "ProductCode": "bussola1",
+        "ProductCode": "crazycookie",
         "Quantity": 1
       }
     },
@@ -37,14 +34,17 @@ content-type: application/json
       "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
       "Scope": 
       {
-        "ProductCode": "crazycookie",
-        "Quantity": 1
+        "ProductCode": "rockiecookie",
+        "Quantity": 2
       }
     }
   ]
 }
 ###
-GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
+@erraticOrderId = {{erraticOrderRequest.response.body.$}}
+# get order from ASP.NET endpoint
+GET http://{{baseUrl}}/order/{{erraticOrderId}}
 ###
-GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
+# get balance for a cookie
+GET http://{{baseUrl}}/balance/crazycookie
 ###
