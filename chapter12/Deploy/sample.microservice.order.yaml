@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: <registry>/sample.microservice.order:latest
+        image: <registry>/sample.microservice.order:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

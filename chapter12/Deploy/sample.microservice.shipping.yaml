@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: shipping-service
-        image: <registry>/sample.microservice.shipping:latest
+        image: <registry>/sample.microservice.shipping:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always
