@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: shipping-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.shipping:latest
+        image: <registry>/sample.microservice.shipping:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always
