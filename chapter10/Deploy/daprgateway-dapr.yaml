@@ -26,8 +26,8 @@ spec:
       labels:
         app: daprgateway
       annotations:
-          dapr.io/enabled: "true"
-          dapr.io/app-id: "apim"
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "apim"
     spec:
       terminationGracePeriodSeconds: 60
       containers:

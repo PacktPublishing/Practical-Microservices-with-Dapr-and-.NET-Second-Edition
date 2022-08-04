@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: reservationactor-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.reservationactor:latest
+        image: <registry>/sample.microservice.reservationactor:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

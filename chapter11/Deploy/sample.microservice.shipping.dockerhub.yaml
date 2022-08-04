@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: shipping-service
-        image: davidebedin/sample.microservice.shipping:latest
+        image: davidebedin/sample.microservice.shipping:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

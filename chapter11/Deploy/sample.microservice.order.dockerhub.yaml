@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: davidebedin/sample.microservice.order:latest
+        image: davidebedin/sample.microservice.order:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

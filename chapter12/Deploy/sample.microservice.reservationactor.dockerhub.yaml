@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: reservationactor-service
-        image: davidebedin/sample.microservice.reservationactor:latest
+        image: davidebedin/sample.microservice.reservationactor:2.0
         ports:
         - containerPort: 80
         imagePullPolicy: Always

@@ -16,7 +16,6 @@ public class CustomizationController : ControllerBase
     public async Task<ActionResult<OrderCustomization>> CustomizeOrder(Order order, [FromServices] DaprClient daprClient)
     {            
         // no state management in this microservice sample
-            
         var result = new OrderCustomization(){OrderId = order.Id, CustomizedItems = new List<ItemCustomization>()};
 
         // no customization requested
