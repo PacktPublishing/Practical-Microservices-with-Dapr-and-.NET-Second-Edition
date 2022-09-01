@@ -21,24 +21,16 @@ public class CustomConfigFilter : IProxyConfigFilter
         foreach (var d in origCluster.Destinations)
         {
             var origAddress = d.Value.Address;
-            if (_exp.IsMatch(origAddress))
+            //replace all regex matches in the address with the environment variable value  
+            var newAddress = _exp.Replace(origAddress, match => Environment.GetEnvironmentVariable(match.Groups[1].Value));
+            if (origAddress != newAddress)
             {
-                // Get the name of the env variable from the destination and lookup value
-                var lookup = _exp.Matches(origAddress)[0].Groups[1].Value;
-                var newAddress = Environment.GetEnvironmentVariable(lookup);
-
-                if (string.IsNullOrWhiteSpace(newAddress))
-                {
-                    throw new ArgumentException($"Configuration Filter Error: Substitution for '{lookup}' in cluster '{d.Key}' not found as an environment variable.");
-                }
-
-                // using c# 9 "with" to clone and initialize a new record
-                //var modifiedDest = d.Value with { Address = newAddress };
-                var modifiedDest = d.Value with { Address = _exp.Replace(origAddress, newAddress)};
-                newDests.Add(d.Key, modifiedDest);
+                // If the address has changed, we'll create a new destination with the new address
+                newDests.Add(d.Key, new DestinationConfig { Address = newAddress });
             }
             else
             {
+                // If the address hasn't changed, we'll just return the original destination
                 newDests.Add(d.Key, d.Value);
             }
         }

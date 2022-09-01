@@ -6,7 +6,7 @@ param (
     [string]$default = "latest"
     )
 $builddate = "2022-09-01"
-$buildversion = "0.1.5"
+$buildversion = "0.1.6"
 
 $container = "sample.proxy"
 $latest = "{0}/{1}:{2}" -f $registry, $container, $default 
