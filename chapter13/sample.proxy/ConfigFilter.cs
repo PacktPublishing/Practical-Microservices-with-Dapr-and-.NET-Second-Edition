@@ -5,8 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Yarp.ReverseProxy.Configuration;
 
-namespace Yarp.Sample;
-
 public class CustomConfigFilter : IProxyConfigFilter
 {
     // Matches {{env_var_name}}
@@ -35,7 +33,8 @@ public class CustomConfigFilter : IProxyConfigFilter
                 }
 
                 // using c# 9 "with" to clone and initialize a new record
-                var modifiedDest = d.Value with { Address = newAddress };
+                //var modifiedDest = d.Value with { Address = newAddress };
+                var modifiedDest = d.Value with { Address = _exp.Replace(origAddress, newAddress)};
                 newDests.Add(d.Key, modifiedDest);
             }
             else

@@ -10,7 +10,7 @@ builder.Services.AddControllers().AddDapr(opt => opt.UseJsonSerializationOptions
 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
-    .AddConfigFilter<Yarp.Sample.CustomConfigFilter>();
+    .AddConfigFilter<CustomConfigFilter>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
