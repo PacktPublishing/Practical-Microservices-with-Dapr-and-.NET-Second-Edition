@@ -27,10 +27,6 @@ public class OrderController : ControllerBase
             var result = await daprClient.InvokeMethodAsync<Item, Item>(HttpMethod.Post, "reservation-service", "reserve", data);
         }
         
-        // Alternative approach with ETag for first-write-wins
-        // Console.WriteLine($"ETag {state.ETag}");
-        // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
-        // await state.SaveAsync(options);
         await state.SaveAsync();
 
         Console.WriteLine($"Submitted order {order.Id}");

@@ -27,7 +27,10 @@ GET http://{{baseUrl}}:{{orderservicePort}}/order/{{orderId}}
 ###
 GET http://{{baseUrl}}:{{orderserviceDaprPort}}/v1.0/state/orderstore/{{orderId}}
 ###
-POST http://localhost:5002/reserve 
+@reservationservicePort = 5002
+@reservationserviceDaprPort = 5020
+###
+POST http://{{baseUrl}}:{{reservationservicePort}}/reserve 
 content-type: application/json
 
 {
@@ -35,8 +38,13 @@ content-type: application/json
     "Quantity": 4
 }
 ###
-@reservationservicePort = 5002
-@reservationserviceDaprPort = 5020
+POST http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/invoke/reservation-service/method/reserve 
+content-type: application/json
+
+{
+    "SKU": "cookie2",
+    "Quantity": 4
+}
 ###
 GET http://{{baseUrl}}:{{reservationserviceDaprPort}}/v1.0/state/reservationstore/cookie2  
 ###
