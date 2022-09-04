@@ -4,8 +4,8 @@ param (
     [string]$registry = "registry", 
     [string]$default = "latest"
     )
-$builddate = "2022-05-02"
-$buildversion = "2.0"
+$builddate = "2022-09-04"
+$buildversion = "2.1"
 
 $container = "sample.microservice.order"
 $latest = "{0}/{1}:{2}" -f $registry, $container, $default 
