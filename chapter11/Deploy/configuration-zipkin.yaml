@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Configuration
 metadata:
-  name: zipkin-tracing
+  name: tracing
   namespace: default
 spec:
   tracing:
