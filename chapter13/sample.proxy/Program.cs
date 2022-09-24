@@ -8,7 +8,11 @@ var jsonOpt = new JsonSerializerOptions()
 // Add services to the container.
 builder.Services.AddControllers().AddDapr(opt => opt.UseJsonSerializationOptions(jsonOpt));
 
-builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+// with YARP I leverage ConfigFilter feature https://microsoft.github.io/reverse-proxy/articles/config-filters.html
+// to replace {{variables}} with ENV variables
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddConfigFilter<CustomConfigFilter>(); 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

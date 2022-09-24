@@ -21,5 +21,5 @@ ARG BUILD_VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.version=$BUILD_VERSION
 LABEL org.label-schema.name="Practical Microservices with Dapr and .NET - sample: proxy with YARP"
-LABEL org.label-schema.description=".NET 6.0, Yarp 1.1 and Dapr 1.7"
+LABEL org.label-schema.description=".NET 6.0, Yarp 1.1 and Dapr 1.8"
 LABEL org.label-schema.schema-version="1.0"

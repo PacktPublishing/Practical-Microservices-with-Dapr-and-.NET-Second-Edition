@@ -1,0 +1,32 @@
+apiVersion: dapr.io/v1alpha1
+kind: Resiliency
+metadata:
+  name: myresiliency
+scopes:
+  - order-service
+  - reservation-service
+spec:
+  policies:
+    timeouts:
+      general: 5s
+    retries:
+      important:
+        policy: constant
+        duration: 5s
+        maxRetries: 30
+    circuitBreakers:
+      commonCB:
+        maxRequests: 1
+        interval: 5s
+        timeout: 30s
+        trip: consecutiveFailures > 3
+  targets:
+    apps:
+      reservation-service:
+        timeout: general
+        retry: important
+        circuitBreaker: commonCB
+      order-service:
+        timeout: general
+        retry: important
+        circuitBreaker: commonCB

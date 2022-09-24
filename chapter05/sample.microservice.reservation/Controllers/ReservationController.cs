@@ -27,13 +27,17 @@ public class ReservationController : ControllerBase
         state.Value.Changes.Add(change);
         if (state.Value.Changes.Count > 10) state.Value.Changes.RemoveAt(0);
 
-        await state.SaveAsync();
-
+        // TrySaveAsync leverages ETag while SaveAsync does not
+        Console.WriteLine($"ETag {state.ETag}");
+        var saved = await state.TrySaveAsync();
+        if (saved != true)
+        {
+            Console.WriteLine("Failed to save state");
+            return this.StatusCode(500);
+        }
         // return current balance
         var result = new Item() {SKU = state.Value.SKU, Quantity= state.Value.BalanceQuantity};
-
         Console.WriteLine($"Reservation of {result.SKU} is now {result.Quantity}");
-
         return result;
     }
 

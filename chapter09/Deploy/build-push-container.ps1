@@ -5,7 +5,7 @@ param (
     [string]$registry = "registry", 
     [string]$default = "latest"
     )
-$builddate = "2022-05-07"
+$builddate = "2022-09-15"
 $buildversion = "2.0"
 
 $container = "sample.microservice.order"
