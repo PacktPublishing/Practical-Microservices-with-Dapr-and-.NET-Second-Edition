@@ -1,0 +1,91 @@
+@baseUrl = x.y.z.k
+###
+GET https://{{baseUrl}}/balance/bussola1
+### 
+# NON problematic order
+# @name simpleOrderRequest
+POST https://{{baseUrl}}/order HTTP/1.1
+content-type: application/json
+
+{
+  "CustomerCode": "Davide",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
+  "Items": [
+    {
+      "ProductCode": "rockiecookie{{$randomInt 1 100}}",
+      "Quantity": 1
+    },
+    {
+      "ProductCode": "bussola{{$randomInt 1 100}}",
+      "Quantity": 1
+    },
+    {
+      "ProductCode": "esse{{$randomInt 1 100}}",
+      "Quantity": 1
+    },
+    {
+      "ProductCode": "bussola1",
+      "Quantity": 2
+    }
+  ],
+  "SpecialRequests" : []
+}
+###
+@orderId = {{simpleOrderRequest.response.body.$}}
+GET https://{{baseUrl}}/order/{{orderId}} HTTP/1.1
+###
+# problematic order
+# @name erraticOrderRequest
+POST https://{{baseUrl}}/order HTTP/1.1
+content-type: application/json
+
+{
+  "CustomerCode": "Davide",
+  "Date": "{{$datetime 'YYYY-MM-DD'}}",
+  "Items": [
+    {
+      "ProductCode": "rockiecookie{{$randomInt 1 100}}",
+      "Quantity": 4
+    },
+    {
+      "ProductCode": "bussola{{$randomInt 1 100}}",
+      "Quantity": 7
+    },
+    {
+      "ProductCode": "esse{{$randomInt 1 100}}",
+      "Quantity": 6
+    },
+    {
+      "ProductCode": "bussola1",
+      "Quantity": 2
+    },
+    {
+      "ProductCode": "crazycookie",
+      "Quantity": 2
+    }
+  ],
+  "SpecialRequests" : [
+    {
+      "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
+      "Scope": 
+      {
+        "ProductCode": "bussola1",
+        "Quantity": 1
+      }
+    },
+    {
+      "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
+      "Scope": 
+      {
+        "ProductCode": "crazycookie",
+        "Quantity": 1
+      }
+    }
+  ]
+}
+###
+@erraticOrderId = {{erraticOrderRequest.response.body.$}}
+# get problematic order
+GET https://{{baseUrl}}/order/{{erraticOrderId}} HTTP/1.1
+###
+
