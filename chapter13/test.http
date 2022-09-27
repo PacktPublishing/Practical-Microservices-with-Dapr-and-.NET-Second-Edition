@@ -1,4 +1,4 @@
-@baseUrl = t1-proxy.orangeriver-e386e48b.northeurope.azurecontainerapps.io
+@baseUrl = x.y.z.k
 ###
 GET https://{{baseUrl}}/balance/bussola1
 ### 
