@@ -66,7 +66,3 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 ## Other books by the authors
 [Practical Microservices with Dapr and .NET](https://www.packtpub.com/product/practical-microservices-with-dapr-and-net/9781800568372?utm_source=github&utm_medium=repository&utm_campaign=9781800568372)
-### Download a free PDF
-
- <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
-<p align="center"> <a href="https://packt.link/free-ebook/9781803248127">https://packt.link/free-ebook/9781803248127 </a> </p>
