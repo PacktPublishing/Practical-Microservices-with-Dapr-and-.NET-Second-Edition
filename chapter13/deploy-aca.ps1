@@ -7,7 +7,8 @@ $LOCATION = ""
 $COMPONENT_PATH = ""
 # the following script deploy Azure Container Apps using images from the public Docker Hub repository
 $REGISTRY_NAME = "davidebedin"
-# if you chose to import the container images into an Azure Container Registry, you need to provide credentials
+# if you instead choose to import container images from Docker Hub into Azure Container Registry 
+# or use container images pushed to Azure Container Registry, you need to provide credentials
 # see https://learn.microsoft.com/en-us/azure/container-apps/get-started-existing-container-image?tabs=bash&pivots=container-apps-private-registry
 
 $LOG_ANALYTICS_WORKSPACE_CLIENT_ID=(az monitor log-analytics workspace show --query customerId -g $RESOURCE_GROUP -n $LOG_ANALYTICS_WORKSPACE --out tsv)
